@@ -1,6 +1,23 @@
-import Graph from "react-graph-vis";
+// @ts-ignore
+import Graph from 'react-graph-vis';
 import "./graph.css";
 import {useRef} from "react"; // Importing the correct CSS
+type GraphData = {
+    nodes: {
+        id: number;
+        label: string;
+        title: string;
+        color?: string;
+        fixed?: {
+            x: boolean,
+            y: boolean,
+        }
+    }[];
+    edges: {
+        from: number;
+        to: number;
+    }[];
+};
 const SAMPLE = {
     nodes: [
         {id: 0, label: "0", x: 107, y: -133},
@@ -55,7 +72,7 @@ const SAMPLE = {
         {from: 9, to: 6},
     ]
 }
-function GraphRep({graph, setGraph, options, isEditing}) {
+function GraphRep({graph, setGraph, options, isEditing}: any) {
 
     const networkRef = useRef(null);
 
@@ -74,40 +91,37 @@ function GraphRep({graph, setGraph, options, isEditing}) {
             manipulation: {
                 enabled: true,
                 initiallyActive: true,
-                addNode: function (nodeData, callback) {
+                addNode: function (nodeData: any, callback: any) {
                     const newNodeId = graph.nodes.length;
                     const newNode = {...nodeData, id: newNodeId, label: `${newNodeId}`};
                     console.log(newNode);
-                    setGraph((prevGraph) => ({
+                    setGraph((prevGraph: GraphData) => ({
                         ...prevGraph,
                         nodes: [...prevGraph.nodes, newNode],
                     }));
                     callback(newNode);
                 },
-                addEdge: function (edgeData, callback) {
+                addEdge: function (edgeData: any, callback: any) {
                     if (edgeData.from !== edgeData.to) {
-                        setGraph((prevGraph) => ({
+                        setGraph((prevGraph: GraphData) => ({
                             ...prevGraph,
                             edges: [...prevGraph.edges, edgeData],
                         }));
                         callback(edgeData);
                     }
                 },
-                deleteNode: function (data, callback) {
-                    console.log("old nodes",graph.nodes);
-                    console.log("old edges",graph.edges);
-                    let newNodes = graph.nodes.filter(node => !data.nodes.includes(node.id));
-                    let newEdges = graph.edges.filter(edge => !data.edges.includes(edge.id));
-                    console.log("new nodes",newNodes);
-                    console.log("new edges",newEdges);
+                deleteNode: function (data: any, callback: any) {
+
+                    let newNodes = graph.nodes.filter((node: { id: any; }) => !data.nodes.includes(node.id));
+                    let newEdges = graph.edges.filter((edge: { id: any; }) => !data.edges.includes(edge.id));
                     setGraph({nodes: [...newNodes], edges: [...newEdges]});
                     callback(data);
                 },
-                deleteEdge: function (data, callback) {
+                deleteEdge: function (data: { nodes: string | any[]; edges: string | any[]; }, callback: (arg0: any) => void) {
                     console.log("old nodes",graph.nodes);
                     console.log("old edges",graph.edges);
-                    let newNodes = graph.nodes.filter(node => !data.nodes.includes(node.id));
-                    let newEdges = graph.edges.filter(edge => !data.edges.includes(edge.id));
+                    let newNodes = graph.nodes.filter((node: { id: string; }) => !data.nodes.includes(node.id));
+                    let newEdges = graph.edges.filter((edge: { id: string; }) => !data.edges.includes(edge.id));
                     console.log("new nodes",newNodes);
                     console.log("new edges",newEdges);
                     setGraph({nodes: [...newNodes], edges: [...newEdges]});
@@ -132,18 +146,13 @@ function GraphRep({graph, setGraph, options, isEditing}) {
     }
 
     const events = {
-        select: function (event) {
+        select: function (event: { nodes: any; edges: any; }) {
             let {nodes, edges} = event;
             console.log("Selected nodes:", nodes);
             console.log("Selected edges:", edges);
         }
     };
-    const rearrangeGraph = () => {
-        if (networkRef.current) {
-            networkRef.current.stabilize(200);
-            console.log(networkRef.current.getSeed());
-        }
-    };
+
     let exampleClickHandle = () => {
         setGraph(SAMPLE);
     }
@@ -157,7 +166,6 @@ function GraphRep({graph, setGraph, options, isEditing}) {
     return (
         <div className="relative">
             <button className="btn btn-primary hidden" onClick={getNodePositions}>get</button>
-            <button onClick={rearrangeGraph} className="hidden">Rearrange Graph</button>
             <div className="absolute right-0 bottom-0 z-10 flex gap-4">
                 <button
                     onClick={resetGraphClickHandle}
@@ -178,7 +186,7 @@ function GraphRep({graph, setGraph, options, isEditing}) {
                 graph={graph}
                 options={newOptions}
                 events={events}
-                getNetwork={network => {
+                getNetwork={(network: null) => {
                     networkRef.current = network; // Store the network instance
                 }}
             />

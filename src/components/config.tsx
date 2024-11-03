@@ -1,17 +1,16 @@
 import {FaTemperatureHalf} from "react-icons/fa6";
 import {FaRegSnowflake} from "react-icons/fa";
 import {MdColorLens} from "react-icons/md";
-import {useRef, useState} from "react";
+import {useState} from "react";
 import {IoMdClose} from "react-icons/io";
 import {RiSpeedFill} from "react-icons/ri";
 
 const Config = ({startClickHandle, randomClickHandle,doneEditClickHandle,iterationStartHandle,
-                    resetClickHandle,parameters,setParameters, isEditing, speed}) => {
+                    resetClickHandle,parameters,setParameters, isEditing, speed}: any) => {
     const numberRegex = /^[+-]?(\d+(\.\d*)?|\.\d+)([eE][+-]?\d+)?$/;
     let [initialized, setInitialized] = useState(false);
     const [isIterate, setIsIterate] = useState(false);
-    const [currentSpeed, setSpeed] = useState(speed.current);
-    let onInputChange = (e) => {
+    let onInputChange = (e: any) => {
         if(numberRegex.test(e.target.value) || e.target.value === "") {
             let newParams = {...parameters};
             if(e.target.name === "colors" && e.target.value !== "") {

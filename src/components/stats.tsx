@@ -1,11 +1,8 @@
 import {BiStats} from "react-icons/bi";
 import {FaRandom} from "react-icons/fa";
-import {LuIterationCcw} from "react-icons/lu";
-import {RiMicrosoftLoopFill} from "react-icons/ri";
-import {SiLoopback} from "react-icons/si";
 import {FaTemperatureThreeQuarters} from "react-icons/fa6";
 
-const Stats = ({saObject}) => {
+const Stats = ({saObject}: any) => {
     return (
         <div className="border-[#474060] border p-5 flex flex-col gap-2 rounded-3xl h-full">
             <div
