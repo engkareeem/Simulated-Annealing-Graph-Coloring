@@ -15,6 +15,22 @@ This project is a React-based tool to solve the graph coloring problem using the
 - **React** with **TypeScript** for the frontend interface.
 - **React Graph Vis** for graph visualization and manipulation.
 
+## Preview
+1. Set up the graph and initial values
+   ![App Screenshot](assets/graph_setup.png)
+   ![App Screenshot](assets/setup.png)
+2. Random solution 
+   - Initial Temperature **100**
+   - Cooling rate **98%**
+   - Colors number **4**
+   - Random solution conflict **4**
+
+   ![App Screenshot](assets/random.png)
+3. Optimizing
+    - Optimized solution conflict **0**
+    - Solutions explored 52
+   
+    ![App Screenshot](assets/optimized.png)
 ## Setup
 
 1. Clone the repository:

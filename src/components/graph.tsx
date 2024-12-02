@@ -92,7 +92,7 @@ function GraphRep({graph, setGraph, options, isEditing}: any) {
                 enabled: true,
                 initiallyActive: true,
                 addNode: function (nodeData: any, callback: any) {
-                    const newNodeId = graph.nodes.length;
+                    const newNodeId = graph.nodes[graph.nodes.length - 1] ? graph.nodes[graph.nodes.length - 1].id + 1 : 0;
                     const newNode = {...nodeData, id: newNodeId, label: `${newNodeId}`};
                     console.log(newNode);
                     setGraph((prevGraph: GraphData) => ({
@@ -111,19 +111,14 @@ function GraphRep({graph, setGraph, options, isEditing}: any) {
                     }
                 },
                 deleteNode: function (data: any, callback: any) {
-
                     let newNodes = graph.nodes.filter((node: { id: any; }) => !data.nodes.includes(node.id));
                     let newEdges = graph.edges.filter((edge: { id: any; }) => !data.edges.includes(edge.id));
                     setGraph({nodes: [...newNodes], edges: [...newEdges]});
                     callback(data);
                 },
                 deleteEdge: function (data: { nodes: string | any[]; edges: string | any[]; }, callback: (arg0: any) => void) {
-                    console.log("old nodes",graph.nodes);
-                    console.log("old edges",graph.edges);
                     let newNodes = graph.nodes.filter((node: { id: string; }) => !data.nodes.includes(node.id));
                     let newEdges = graph.edges.filter((edge: { id: string; }) => !data.edges.includes(edge.id));
-                    console.log("new nodes",newNodes);
-                    console.log("new edges",newEdges);
                     setGraph({nodes: [...newNodes], edges: [...newEdges]});
                     callback(data);
                 },

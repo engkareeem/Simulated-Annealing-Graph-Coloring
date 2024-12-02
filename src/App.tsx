@@ -139,9 +139,7 @@ const App = () => {
                     simulatedAnnealing.iterate();
                     let tested = simulatedAnnealing.testedVerticesColors;
                     let newColors = simulatedAnnealing.getStringColors(tested);
-                    console.log(JSON.stringify(tested))
-                    console.log(JSON.stringify(newColors))
-                    console.log('------------------------------')
+
                     colorizeGraph(newColors);
 
                     let newSimulatedAnnealing = new SimulatedAnnealing();

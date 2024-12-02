@@ -123,13 +123,11 @@ export class SimulatedAnnealing {
     }
 
     iterate() {
-        // console.log(this.currentTemp)
         let vertex = this.getRandomVertex();
         let oldColor = this.verticesColors[vertex];
         this.verticesColors[vertex] = this.getRandomColor(this.verticesColors[vertex]);
         this.testedVerticesColors = {...this.verticesColors}; // to save the solution even if it's not accepted
-        console.log(JSON.stringify(this.getStringColors(this.testedVerticesColors)))
-        console.log(JSON.stringify(this.testedVerticesColors))
+
         let newConflict = this.getConflictsCount(this.verticesColors);
         if (newConflict < this.currentConflict || Math.random() < Math.exp((this.currentConflict - newConflict) / this.currentTemp)) {
             this.currentConflict = newConflict;
