@@ -35,11 +35,11 @@ This project is a React-based tool to solve the graph coloring problem using the
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/graph-coloring-simulated-annealing.git
+   git clone https://github.com/engkareeem/Simulated-Annealing-Graph-Coloring.git
    ```
 2. Navigate to the project folder:
    ```bash
-   cd graph-coloring-simulated-annealing
+   cd Simulated-Annealing-Graph-Coloring
    ```
 3. Install dependencies:
    ```bash
